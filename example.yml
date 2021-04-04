@@ -1,0 +1,60 @@
+hosts:
+  ams: ssh -J fed4fire...
+  par: ssh -J fed4fire...
+  testmachine: ssh -J fed4fire...
+  gent: ssh jwuensche@...
+network:
+  ams:
+    - dev: vpp0
+      ip: "10.1.7.0/24"
+  par:
+    - dev: vpp0
+      ip: "10.1.1.0/24"
+
+experiments:
+  delay:
+    allow_ips:
+      par:
+        - dev: vpp0
+          ip: 10.1.2.0/24
+      ams:
+        - dev: vpp0
+          ip: 10.1.7.0/24
+    command: scion ping 19-ffaa:0:1310,10.44.44.1
+
+  fail-over:
+    allow_ips:
+      par:
+        - dev: vpp0
+          ip: 10.1.2.0/24
+      ams:
+        - dev: vpp0
+          ip: 10.1.7.0/24
+    pre:
+      gent: while true; do ip route del 10.1.1.1/32 && sleep 5 && ip route add 10.1.1.1/32 dev gts && sleep 5; done
+    command: scion ping 19-ffaa:0:1310,10.44.44.1
+
+  bandwidth:
+    allow_ips:
+      par:
+        - dev: vpp0
+          ip: 10.1.2.0/24
+      ams:
+        - dev: vpp0
+          ip: 10.1.7.0/24
+    pre:
+      gent: ./spate s
+    command: spate c 19-ffaa:0:1310,[10.44.44.1]:1337 -1
+
+  multi-bandwidth:
+    allow_ips:
+      par:
+        - dev: vpp0
+          ip: 10.1.2.0/24
+      ams:
+        - dev: vpp0
+          ip: 10.1.7.0/24
+    pre:
+      gent: ./spate s
+    command: spate c 19-ffaa:0:1310,[10.44.44.1]:1337
+

@@ -1,0 +1,22 @@
+hosts:
+  ams: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.20
+  par: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.11
+  testmachine: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.10
+  gent: jwuensch@193.190.127.214
+network:
+  par:
+  gent:
+    - dev: vlan1293
+      ip: 10.1.15.0/24
+
+experiments:
+  delay:
+    allow_ips:
+      gent:
+        - dev: vlan1293
+          ip: 10.1.15.0/24
+    pre:
+      gent: touch gent
+      par: sh -c "sleep 30 && touch par" > /dev/null 2>&1 &
+      ams: touch ams
+    command: touch foobar
