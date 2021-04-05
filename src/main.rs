@@ -14,7 +14,11 @@ fn main() -> Result<()> {
         println!("Performing network experiment {}!", exp_name);
         exp.allow_ips(&config)?;
         exp.prepare(&config)?;
-        exp.perform(&config)?;
+        for i in 1..=exp.repetitions {
+            println!("Performing experiment run {}", i);
+            exp.perform(&config)?;
+            std::thread::sleep(Duration::from_millis(500));
+        }
         exp.post(&config)?;
         exp.teardown(&config)?;
         std::thread::sleep(Duration::from_millis(500));

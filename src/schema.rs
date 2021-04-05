@@ -16,7 +16,8 @@ pub struct Config {
 pub struct NetHosts {
     par: Option<Vec<Device>>,
     ams: Option<Vec<Device>>,
-    gent: Option<Vec<Device>>,
+    gent1: Option<Vec<Device>>,
+    gent2: Option<Vec<Device>>,
 }
 
 impl NetHosts {
@@ -61,7 +62,8 @@ impl<'a> Iterator for NetHostsIterator<'a> {
         match self.index {
             0 => item = Some(("par".to_string(), self.hosts.par.as_ref())),
             1 => item = Some(("ams".to_string(), self.hosts.ams.as_ref())),
-            2 => item = Some(("gent".to_string(), self.hosts.gent.as_ref())),
+            2 => item = Some(("gent1".to_string(), self.hosts.gent1.as_ref())),
+            3 => item = Some(("gent2".to_string(), self.hosts.gent2.as_ref())),
             _ => item = None,
         }
         self.index += 1;
@@ -84,6 +86,7 @@ pub struct Experiment {
     pub pre: Option<Treatment>,
     pub command: String,
     pub post: Option<Treatment>,
+    pub repetitions: usize,
 }
 
 #[derive(Deserialize)]
