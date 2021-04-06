@@ -2,21 +2,30 @@ hosts:
   ams: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.20
   par: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.11
   testmachine: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.10
-  gent: jwuensch@193.190.127.214
+  gent1: jwuensch@193.190.127.214
+  gent2: jwuensch@193.190.127.226
 network:
   par:
-  gent:
+  gent1:
     - dev: vlan1167
       ip: 10.1.1.0/24
     - dev: vlan1068
       ip: 10.1.16.0/24
     - dev: vlan1293
       ip: 10.1.15.0/24
+  gent2:
+    - dev: vlan1175
+      ip: 10.1.7.0/24
+    - dev: vlan1294
+      ip: 10.1.17.0/24
 
 experiments:
   delay:
     allow_ips:
-      gent:
+      gent1:
         - dev: vlan1293
           ip: 10.1.15.0/24
+      gent2:
+        - dev: vlan1175
+          ip: 10.1.7.0/24
     command: touch foobar

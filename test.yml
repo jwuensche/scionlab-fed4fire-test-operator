@@ -3,9 +3,8 @@ hosts:
   par: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.11
   testmachine: -J fed4fire@141.44.25.144,scionlab@10.2.1.25 scionlab@172.16.0.10
   gent1: jwuensch@193.190.127.214
-  gent1: jwuensch@193.190.127.226
+  gent2: jwuensch@193.190.127.226
 network:
-  par:
   gent1:
     - dev: vlan1293
       ip: 10.1.15.0/24

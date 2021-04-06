@@ -23,6 +23,7 @@ fn main() -> Result<()> {
         exp.teardown(&config)?;
         std::thread::sleep(Duration::from_millis(500));
     }
+    println!("Reset network to pre-experiment status.");
     config.reconstruct_network()?;
     Ok(())
 }
